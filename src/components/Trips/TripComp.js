@@ -6,7 +6,15 @@ import {
   GetTripCategories,
 } from "../../slices/tripSlice";
 import { GetDestination_Mains } from "../../slices/destinationSlice";
-import { Form, Row, Col, Button, FormCheck, Table } from "react-bootstrap";
+import {
+  Form,
+  Row,
+  Col,
+  Button,
+  FormCheck,
+  Table,
+  InputGroup,
+} from "react-bootstrap";
 import {
   FaPlus,
   FaTrash,
@@ -33,6 +41,7 @@ function TripComp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState(""); // State for search functionality
+  const [SearchCategory, setSearchCategory] = useState("");
   const [destination_id, setDestinationId] = useState(0);
   const [showPopup, setShowPopup] = useState(false); // State for popup visibility
   const [popupMessage, setPopupMessage] = useState(""); // State for popup message
@@ -165,7 +174,7 @@ function TripComp() {
   };
   const shouldShowError =
     (dirty || touched) && !isValidSlug && formData.route?.length > 0;
-
+  console.log(SearchCategory);
   return (
     <section className="layout_section">
       <div className="d-flex justify-content-between align-items-center header_title">
@@ -432,20 +441,48 @@ function TripComp() {
               <th>default name</th>
               <th>duration</th>
               <th>pickup</th>
-              <th>show in top</th>
-              <th>show in slider</th>
+              <th>in top</th>
+              <th>in slider</th>
               <th>destination</th>
               <th>route</th>
-              <th>Category</th>
+              <th>
+                Category
+                {/* <InputGroup className="filterInput"> */}
+                {/* <Form.Label>Destination</Form.Label> */}
+                <Form.Control
+                  as="select"
+                  name="trip_type"
+                  onChange={(e) => setSearchCategory(e.target.value)}
+                  value={SearchCategory}
+                  required
+                  className="filterInput"
+                >
+                  <option value="">filter...</option>
+                  {TripCategories &&
+                    TripCategories?.map((cat, index) => (
+                      <option key={index} value={cat.id}>
+                        {cat.type_name}
+                      </option>
+                    ))}
+                </Form.Control>
+                {/* <Button onClick={()=> setSearchCategory()}>
+                    <FaSearch />
+                  </Button> */}
+                {/* </InputGroup> */}
+              </th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {TripsMain &&
-              TripsMain.filter((item) =>
-                item.trip_default_name
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase())
+              TripsMain.filter(
+                (item) =>
+                  item.trip_default_name
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) &&
+                  item.trip_type
+                    ?.toString()
+                    .includes(SearchCategory?.toString())
               ).map((trip, index) => (
                 <tr
                   key={index}
