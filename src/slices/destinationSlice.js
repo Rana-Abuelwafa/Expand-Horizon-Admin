@@ -25,10 +25,10 @@ const getAuthHeaders = (isForm) => {
 //Get Destination drown down
 export const GetDestination_Mains = createAsyncThunk(
   "destinations/GetDestination_Mains",
-  async (_, { rejectWithValue }) => {
+  async (leaf, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/GetDestinationMain`,
+        `${BASE_URL}/GetDestinationMain?leaf=` + leaf,
         {},
         getAuthHeaders(false)
       );

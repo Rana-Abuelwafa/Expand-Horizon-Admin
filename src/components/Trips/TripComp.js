@@ -75,7 +75,7 @@ function TripComp() {
 
   useEffect(() => {
     dispatch(GetTripCategories());
-    dispatch(GetDestination_Mains());
+    dispatch(GetDestination_Mains(true));
     dispatch(GetTrip_Mains(destination_id));
     return () => {};
   }, [dispatch]);
@@ -346,7 +346,7 @@ function TripComp() {
             </Col>
 
             <Col md={2} xs={12}>
-              <Form.Group className="mb-3" controlId="packageName">
+              <Form.Group className="mb-3">
                 <FormCheck
                   type="checkbox"
                   id="show_in_top"
@@ -363,7 +363,7 @@ function TripComp() {
               </Form.Group>
             </Col>
             <Col md={2} xs={12}>
-              <Form.Group className="mb-3" controlId="packageName">
+              <Form.Group className="mb-3">
                 <FormCheck
                   type="checkbox"
                   id="show_in_slider"

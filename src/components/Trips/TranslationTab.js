@@ -217,6 +217,7 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
                 variant="primary"
                 type="submit"
                 className="darkBlue-Btn FullWidthBtn"
+                onClick={(e) => saveData(e, false)}
               >
                 <FaPlus className="me-1" /> Add
               </Button>
