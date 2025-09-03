@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { GetTrip_Mains } from "../../slices/tripSlice";
-function TripHeader({ title, handleTripChange }) {
+function TripHeader({ title, handleTripChange, isPriceTab }) {
   const dispatch = useDispatch();
   const [trip_id, setTrip_id] = useState(0);
 
   const { TripsMain, loading, error } = useSelector((state) => state.trips);
   useEffect(() => {
-    dispatch(GetTrip_Mains(0));
+    let data = { destination_id: 0, trip_type: 0 };
+    dispatch(GetTrip_Mains(data));
     return () => {};
   }, [dispatch]);
   const handleChange = (e) => {
@@ -32,7 +33,9 @@ function TripHeader({ title, handleTripChange }) {
           >
             <option value="">select trip</option>
             {TripsMain &&
-              TripsMain?.map((trip, index) => (
+              TripsMain?.filter(
+                (f) => f.trip_type != (isPriceTab == true ? 2 : -1)
+              ).map((trip, index) => (
                 <option key={index} value={trip.id}>
                   {trip.trip_code} - {trip.trip_default_name}
                 </option>

@@ -81,7 +81,6 @@ export default function SideMenu() {
       }
     }
   }, []);
-  console.log("authorizedMenuItems ", Items);
   return (
     <div className={`side-menu ${collapsed ? "collapsed" : ""}`}>
       {/* {!collapsed && <h3>Menu</h3>} */}
@@ -113,7 +112,7 @@ export default function SideMenu() {
                 </Link>
               </li>
             ) : (
-              <li>
+              <li key={index}>
                 <div
                   className={
                     item.id == "trips"

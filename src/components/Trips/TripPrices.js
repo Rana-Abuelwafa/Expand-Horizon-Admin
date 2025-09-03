@@ -26,6 +26,8 @@ function TripPrices() {
     trip_sale_price: 0,
     currency_code: "",
     delete: false,
+    child_price: 0,
+    notes: "",
   });
   //   useEffect(() => {
   //     dispatch(GetTrip_Prices(trip_id));
@@ -51,6 +53,8 @@ function TripPrices() {
       trip_sale_price: price.trip_sale_price,
       currency_code: price.currency_code,
       delete: true,
+      child_price: price.child_price,
+      notes: price.notes,
     };
     dispatch(SaveTripPrices(data)).then((result) => {
       if (result.payload && result.payload.success) {
@@ -82,6 +86,8 @@ function TripPrices() {
         trip_sale_price: 0,
         currency_code: "",
         delete: false,
+        child_price: 0,
+        notes: "",
       });
     });
   };
@@ -94,6 +100,8 @@ function TripPrices() {
       trip_sale_price: 0,
       currency_code: "",
       delete: false,
+      child_price: 0,
+      notes: "",
     });
   };
   const handleEdit = (trip) => {
@@ -105,11 +113,17 @@ function TripPrices() {
       trip_sale_price: trip.trip_sale_price,
       currency_code: trip.currency_code,
       delete: false,
+      child_price: trip.child_price,
+      notes: trip.notes,
     });
   };
   return (
     <section className="layout_section">
-      <TripHeader title="Trip Prices" handleTripChange={handleTripChange} />
+      <TripHeader
+        title="Trip Prices"
+        handleTripChange={handleTripChange}
+        isPriceTab={true}
+      />
       <hr className="divider" />
       {trip_id > 0 ? (
         <>
@@ -164,6 +178,35 @@ function TripPrices() {
               </Col>
             </Row>
             <Row>
+              <Col md={4}>
+                <Form.Group>
+                  <Form.Label>Child Price</Form.Label>
+                  <Form.Control
+                    type="number"
+                    className="form-control"
+                    placeholder="Enter price"
+                    value={formData.child_price}
+                    name="child_price"
+                    onChange={handleInputChange}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <Form.Group>
+                  <Form.Label>Notes</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="notes"
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleInputChange}
+                    className="formInput"
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
               {isUpdate ? (
                 <>
                   <Col xs={12} md={{ span: 2, offset: 8 }}>
@@ -200,6 +243,8 @@ function TripPrices() {
                     <th>Origin Price</th>
                     <th>Sale Price</th>
                     <th>Currency</th>
+                    <th>Child price</th>
+                    <th>Notes</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -209,6 +254,8 @@ function TripPrices() {
                       <td>{price.trip_origin_price}</td>
                       <td>{price.trip_sale_price}</td>
                       <td>{price.currency_code}</td>
+                      <td>{price.child_price}</td>
+                      <td>{price.notes}</td>
                       <td>
                         <div className="d-flex btn-lst">
                           <button

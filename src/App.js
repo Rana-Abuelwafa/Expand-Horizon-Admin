@@ -15,26 +15,35 @@ import TripImages from "./components/Trips/TripImages";
 import DestinationImages from "./components/Destinations/DestinationImages";
 import Facility from "./components/Facilities/Facility";
 import TripFacility from "./components/Trips/TripFacility";
-
+import CategorySetting from "./components/Transfer/CategorySetting";
+import UnauthorizedPage from "./components/ErrorsPages/UnauthorizedPage";
+import PrivateRoute from "./components/Shared/PrivateRoute";
 export default function App() {
   return (
     <Router>
       <Routes>
         {/* Login page outside layout */}
         <Route path="/login" element={<Login />} />
-
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
         {/* Routes with layout */}
         <Route element={<MainLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/destinations" element={<DestinationComp />} />
-          <Route path="/destinations/images" element={<DestinationImages />} />
-          <Route path="/trips" element={<Trips />} />
-          <Route path="/trips/translation" element={<TripTranslation />} />
-          <Route path="/trips/prices" element={<TripPrices />} />
-          <Route path="/trips/pickups" element={<TripPickUps />} />
-          <Route path="/trips/images" element={<TripImages />} />
-          <Route path="/trips/facility" element={<TripFacility />} />
-          <Route path="/facility" element={<Facility />} />
+          <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
+            {" "}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/destinations" element={<DestinationComp />} />
+            <Route
+              path="/destinations/images"
+              element={<DestinationImages />}
+            />
+            <Route path="/trips" element={<Trips />} />
+            <Route path="/trips/translation" element={<TripTranslation />} />
+            <Route path="/trips/prices" element={<TripPrices />} />
+            <Route path="/trips/pickups" element={<TripPickUps />} />
+            <Route path="/trips/images" element={<TripImages />} />
+            <Route path="/trips/facility" element={<TripFacility />} />
+            <Route path="/facility" element={<Facility />} />
+            <Route path="/transfer" element={<CategorySetting />} />
+          </Route>
         </Route>
 
         {/* Redirect to login for unknown paths */}

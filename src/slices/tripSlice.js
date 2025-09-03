@@ -26,10 +26,13 @@ const getAuthHeaders = (isForm) => {
 //Get main trips list
 export const GetTrip_Mains = createAsyncThunk(
   "trips/GetTrip_Mains",
-  async (destination_id, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/GetTrip_Mains?destination_id=` + destination_id,
+        `${BASE_URL}/GetTrip_Mains?destination_id=` +
+          data.destination_id +
+          "&&trip_type=" +
+          data.trip_type,
         {},
         getAuthHeaders(false)
       );
@@ -223,13 +226,46 @@ export const SaveTripImage = createAsyncThunk(
   }
 );
 
-//save trip main
+//update trip image
 export const UpdateTripImage = createAsyncThunk(
   "trips/UpdateTripImage",
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         `${BASE_URL}/UpdateTripImage`,
+        formData,
+        getAuthHeaders(false)
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+//save transfer Category
+export const SaveTransferCategory = createAsyncThunk(
+  "trips/SaveTransferCategory",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/SaveTransferCategory`,
+        formData,
+        getAuthHeaders(false)
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//get transfer categories list
+export const GetTransfer_Categories = createAsyncThunk(
+  "trips/GetTransfer_Categories",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/GetTransfer_Categories`,
         formData,
         getAuthHeaders(false)
       );
@@ -251,6 +287,7 @@ const tripSlice = createSlice({
     TripPickups: [],
     TripImgs: [],
     TripCategories: [],
+    TransferCategories: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -382,7 +419,29 @@ const tripSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
+      .addCase(SaveTransferCategory.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(SaveTransferCategory.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(SaveTransferCategory.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(GetTransfer_Categories.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(GetTransfer_Categories.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.TransferCategories = action.payload;
+      })
+      .addCase(GetTransfer_Categories.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
         (state) => {

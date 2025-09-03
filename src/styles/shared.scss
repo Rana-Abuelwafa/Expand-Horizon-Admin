@@ -182,6 +182,9 @@ a:active {
 .layout_section {
   padding: 20px;
   height: 100vh;
+  max-height: 100vh;
+  display: block;
+  overflow-y: scroll;
 }
 .header_title {
   margin-bottom: 20px;

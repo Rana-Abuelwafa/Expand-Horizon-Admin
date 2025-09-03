@@ -23,7 +23,7 @@ function DestinationImages() {
   );
 
   useEffect(() => {
-    dispatch(GetDestination_Mains());
+    dispatch(GetDestination_Mains(false));
     return () => {};
   }, [dispatch]);
 
