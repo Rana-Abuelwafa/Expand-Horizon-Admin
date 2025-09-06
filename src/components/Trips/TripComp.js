@@ -69,7 +69,7 @@ function TripComp() {
   });
   const slugRegex = /^(?!-)(?!.*--)[a-zA-Z0-9-]+(?<!-)$/;
   const isValidSlug =
-    formData.route.length === 0 || slugRegex.test(formData.route);
+    formData.route?.length === 0 || slugRegex.test(formData.route);
   const { TripsMain, loading, error, TripCategories, TransferCategories } =
     useSelector((state) => state.trips);
   const { DestinationMain } = useSelector((state) => state.destinations);
