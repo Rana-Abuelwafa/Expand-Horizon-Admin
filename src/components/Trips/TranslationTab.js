@@ -33,7 +33,6 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
       [e.target.name]: e.target.value,
     });
   };
-  console.log("data ", data);
   useEffect(() => {
     if (data != null) {
       setFormData({
@@ -69,7 +68,7 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
     return () => {
       setFormData({
         id: 0,
-        trip_id: trip_id,
+        trip_id: 0,
         lang_code: "",
         trip_name: "",
         trip_description: "",
@@ -147,17 +146,20 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
         <hr />
         <Row>
           <Form.Label column="lg" lg={2}>
-            Name
+            cancelation policy
           </Form.Label>
           <Col>
-            <Form.Control
-              type="text"
-              placeholder="cancelation_policy"
-              name="cancelation_policy"
-              value={formData.cancelation_policy}
-              onChange={handleInputChange}
-              className="formInput"
-            />
+            <Form.Group className="mb-3">
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="cancelation_policy"
+                name="cancelation_policy"
+                value={formData.cancelation_policy}
+                onChange={handleInputChange}
+                className="formInput"
+              />
+            </Form.Group>
           </Col>
         </Row>
         <hr />

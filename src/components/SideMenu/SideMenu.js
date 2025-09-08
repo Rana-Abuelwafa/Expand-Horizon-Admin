@@ -136,16 +136,19 @@ export default function SideMenu() {
                 <ul className={`submenu ${openMenu === item.id ? "open" : ""}`}>
                   {SubMenuItems &&
                     SubMenuItems.filter((sub) => sub.parentId == item.id).map(
-                      (sub, key) => (
-                        <li key={key}>
-                          <Link to={sub.path}>
-                            {IconComponent && (
-                              <IconComponent className="menu-icon" />
-                            )}
-                            <span className="menu-label">{sub.title}</span>
-                          </Link>
-                        </li>
-                      )
+                      (sub, key) => {
+                        const SubIconComponent = allIcons[sub.icon];
+                        return (
+                          <li key={key}>
+                            <Link to={sub.path}>
+                              {SubIconComponent && (
+                                <SubIconComponent className="menu-icon" />
+                              )}
+                              <span className="menu-label">{sub.title}</span>
+                            </Link>
+                          </li>
+                        );
+                      }
                     )}
                 </ul>
                 {/* <TripsSubMenu openMenu={openMenu} /> */}

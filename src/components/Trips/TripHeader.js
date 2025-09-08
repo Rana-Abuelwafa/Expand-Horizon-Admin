@@ -32,10 +32,16 @@ function TripHeader({ title, handleTripChange, isPriceTab }) {
             className="formInput"
           >
             <option value="">select trip</option>
-            {TripsMain &&
+            {/* {TripsMain &&
               TripsMain?.filter(
                 (f) => f.trip_type != (isPriceTab == true ? 2 : -1)
               ).map((trip, index) => (
+                <option key={index} value={trip.id}>
+                  {trip.trip_code} - {trip.trip_default_name}
+                </option>
+              ))} */}
+            {TripsMain &&
+              TripsMain.map((trip, index) => (
                 <option key={index} value={trip.id}>
                   {trip.trip_code} - {trip.trip_default_name}
                 </option>
