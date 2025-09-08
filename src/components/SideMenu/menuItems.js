@@ -46,14 +46,14 @@ export const allMenuItems = [
     roles: ["Admin", "manager", "sales"],
     withSub: false,
   },
-  {
-    id: "transfer",
-    title: "Transfer Category",
-    icon: "FaCar",
-    path: "/transfer",
-    roles: ["Admin", "manager", "sales"],
-    withSub: false,
-  },
+  // {
+  //   id: "transfer",
+  //   title: "Transfer Category",
+  //   icon: "FaCar",
+  //   path: "/transfer",
+  //   roles: ["Admin", "manager", "sales"],
+  //   withSub: false,
+  // },
 ];
 
 export const SubMenuItems = [

@@ -48,6 +48,7 @@ function TripPickUps() {
     setTrip_id(Number(id));
     let data = { trip_id: Number(id), trip_type: 1 };
     dispatch(GetPickupsAllForTrip(data));
+    resetForm();
   };
   const handleInputChange = (e) => {
     setFormData({

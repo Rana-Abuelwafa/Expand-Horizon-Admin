@@ -28,6 +28,8 @@ function TripPrices() {
     delete: false,
     child_price: 0,
     notes: "",
+    pax_from: 0,
+    pax_to: 0,
   });
   //   useEffect(() => {
   //     dispatch(GetTrip_Prices(trip_id));
@@ -37,6 +39,7 @@ function TripPrices() {
   const handleTripChange = (id) => {
     setTrip_id(id);
     dispatch(GetTrip_Prices(id));
+    resetForm();
   };
   const { loading, error, TripPriceList } = useSelector((state) => state.trips);
   const handleInputChange = (e) => {
@@ -55,6 +58,8 @@ function TripPrices() {
       delete: true,
       child_price: price.child_price,
       notes: price.notes,
+      pax_from: price.pax_from,
+      pax_to: price.pax_to,
     };
     dispatch(SaveTripPrices(data)).then((result) => {
       if (result.payload && result.payload.success) {
@@ -88,6 +93,8 @@ function TripPrices() {
         delete: false,
         child_price: 0,
         notes: "",
+        pax_from: 0,
+        pax_to: 0,
       });
     });
   };
@@ -102,6 +109,8 @@ function TripPrices() {
       delete: false,
       child_price: 0,
       notes: "",
+      pax_from: 0,
+      pax_to: 0,
     });
   };
   const handleEdit = (trip) => {
@@ -115,6 +124,8 @@ function TripPrices() {
       delete: false,
       child_price: trip.child_price,
       notes: trip.notes,
+      pax_from: trip.pax_from,
+      pax_to: trip.pax_to,
     });
   };
   return (
@@ -158,6 +169,22 @@ function TripPrices() {
                 </Form.Group>
               </Col>
               <Col md={4}>
+                <Form.Group>
+                  <Form.Label>Child Price</Form.Label>
+                  <Form.Control
+                    type="number"
+                    className="form-control"
+                    placeholder="Enter price"
+                    value={formData.child_price}
+                    name="child_price"
+                    onChange={handleInputChange}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={2}>
                 <Form.Group controlId="curr_code">
                   <Form.Label>Currency</Form.Label>
                   <Form.Control
@@ -176,23 +203,35 @@ function TripPrices() {
                   </Form.Control>
                 </Form.Group>
               </Col>
-            </Row>
-            <Row>
-              <Col md={4}>
+              <Col md={2}>
                 <Form.Group>
-                  <Form.Label>Child Price</Form.Label>
+                  <Form.Label>Pax from</Form.Label>
                   <Form.Control
                     type="number"
                     className="form-control"
-                    placeholder="Enter price"
-                    value={formData.child_price}
-                    name="child_price"
+                    placeholder="pax from"
+                    value={formData.pax_from}
+                    name="pax_from"
                     onChange={handleInputChange}
                     required
                   ></Form.Control>
                 </Form.Group>
               </Col>
-              <Col md={4}>
+              <Col md={2}>
+                <Form.Group>
+                  <Form.Label>Pax To</Form.Label>
+                  <Form.Control
+                    type="number"
+                    className="form-control"
+                    placeholder="pax to"
+                    value={formData.pax_to}
+                    name="pax_to"
+                    onChange={handleInputChange}
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={6}>
                 <Form.Group>
                   <Form.Label>Notes</Form.Label>
                   <Form.Control
@@ -244,6 +283,8 @@ function TripPrices() {
                     <th>Sale Price</th>
                     <th>Currency</th>
                     <th>Child price</th>
+                    <th>Pax From</th>
+                    <th>Pax To</th>
                     <th>Notes</th>
                     <th></th>
                   </tr>
@@ -255,6 +296,8 @@ function TripPrices() {
                       <td>{price.trip_sale_price}</td>
                       <td>{price.currency_code}</td>
                       <td>{price.child_price}</td>
+                      <td>{price.pax_from}</td>
+                      <td>{price.pax_to}</td>
                       <td>{price.notes}</td>
                       <td>
                         <div className="d-flex btn-lst">

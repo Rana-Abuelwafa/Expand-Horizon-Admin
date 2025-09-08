@@ -295,7 +295,7 @@ function TripComp() {
             </Col>
           </Row>
           <Row>
-            {formData.trip_type == 2 ? (
+            {/* {formData.trip_type == 2 ? (
               <Col md={2}>
                 {" "}
                 <Form.Group>
@@ -318,8 +318,8 @@ function TripComp() {
                   </Form.Control>
                 </Form.Group>
               </Col>
-            ) : null}
-            <Col md={formData.trip_type == 2 ? 2 : 3}>
+            ) : null} */}
+            <Col md={3}>
               {" "}
               <Form.Group className="mb-3">
                 <Form.Label>Route</Form.Label>

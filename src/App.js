@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import "./styles/shared.scss";
+import { useEffect } from "react";
 // src/App.js
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
@@ -18,9 +19,18 @@ import TripFacility from "./components/Trips/TripFacility";
 import CategorySetting from "./components/Transfer/CategorySetting";
 import UnauthorizedPage from "./components/ErrorsPages/UnauthorizedPage";
 import PrivateRoute from "./components/Shared/PrivateRoute";
+import { useNavigate } from "react-router-dom";
+import { setNavigator } from "./helper/navigate";
+import NavigationSetter from "./helper/NavigationSetter";
 export default function App() {
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   setNavigator(navigate);
+  // }, [navigate]);
   return (
     <Router>
+      <NavigationSetter />
       <Routes>
         {/* Login page outside layout */}
         <Route path="/login" element={<Login />} />
@@ -42,7 +52,7 @@ export default function App() {
             <Route path="/trips/images" element={<TripImages />} />
             <Route path="/trips/facility" element={<TripFacility />} />
             <Route path="/facility" element={<Facility />} />
-            <Route path="/transfer" element={<CategorySetting />} />
+            {/* <Route path="/transfer" element={<CategorySetting />} /> */}
           </Route>
         </Route>
 

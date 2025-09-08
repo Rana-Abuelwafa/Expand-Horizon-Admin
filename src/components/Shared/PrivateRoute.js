@@ -8,6 +8,12 @@ const PrivateRoute = ({ allowedRoles }) => {
   const [Allow, setAllow] = useState(true);
   useEffect(() => {
     const userLocal = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      setAuth(false);
+      setAllow(false);
+      // return;
+    }
     if (userLocal) {
       const user = JSON.parse(userLocal);
       if (user != null && user.role !== null) {

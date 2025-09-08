@@ -24,6 +24,7 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
     important_info: "",
     trip_not_includes: "",
     delete: false,
+    cancelation_policy: "",
   });
   const { loading, error } = useSelector((state) => state.trips);
   const handleInputChange = (e) => {
@@ -47,6 +48,7 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
         important_info: data.important_info,
         trip_not_includes: data.trip_not_includes,
         delete: false,
+        cancelation_policy: data.cancelation_policy,
       });
     } else {
       setFormData({
@@ -61,6 +63,7 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
         important_info: "",
         trip_not_includes: "",
         delete: false,
+        cancelation_policy: "",
       });
     }
     return () => {
@@ -76,6 +79,7 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
         important_info: "",
         trip_not_includes: "",
         delete: false,
+        cancelation_policy: "",
       });
     };
   }, [data]);
@@ -138,6 +142,22 @@ function TranslationTab({ data, trip_id, lang_code, RefreshList }) {
               value={formData.trip_description}
               onChange={handleInputChange}
             /> */}
+          </Col>
+        </Row>
+        <hr />
+        <Row>
+          <Form.Label column="lg" lg={2}>
+            Name
+          </Form.Label>
+          <Col>
+            <Form.Control
+              type="text"
+              placeholder="cancelation_policy"
+              name="cancelation_policy"
+              value={formData.cancelation_policy}
+              onChange={handleInputChange}
+              className="formInput"
+            />
           </Col>
         </Row>
         <hr />
