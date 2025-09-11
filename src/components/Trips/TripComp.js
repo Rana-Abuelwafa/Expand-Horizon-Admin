@@ -38,6 +38,7 @@ import { FiRefreshCcw } from "react-icons/fi";
 import "./trips.scss";
 import { FiDelete } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+
 function TripComp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ function TripComp() {
     route: "",
     trip_type: 0,
     transfer_category_id: 0,
+    release_days: 1,
   });
   const slugRegex = /^(?!-)(?!.*--)[a-zA-Z0-9-]+(?<!-)$/;
   const isValidSlug =
@@ -103,6 +105,7 @@ function TripComp() {
       route: "",
       trip_type: 0,
       transfer_category_id: 0,
+      release_days: 1,
     });
   };
   const onSubmit = (e) => {
@@ -125,6 +128,7 @@ function TripComp() {
             route: "",
             trip_type: 0,
             transfer_category_id: 0,
+            release_days: 1,
           });
           setIsUpdate(false);
           let data = { destination_id: 0, trip_type: 0 };
@@ -152,6 +156,7 @@ function TripComp() {
       route: trip.route,
       trip_type: trip.trip_type,
       transfer_category_id: trip.transfer_category_id,
+      release_days: trip.release_days,
     });
   };
   const handleDelete = (trip, isDelete) => {
@@ -168,6 +173,7 @@ function TripComp() {
       route: trip.route,
       trip_type: trip.trip_type,
       transfer_category_id: trip.transfer_category_id,
+      release_days: trip.release_days,
     };
     dispatch(SaveMainTrip(data)).then((result) => {
       if (result.payload && result.payload.success) {
@@ -182,7 +188,6 @@ function TripComp() {
   };
   const shouldShowError =
     (dirty || touched) && !isValidSlug && formData.route?.length > 0;
-  console.log(SearchCategory);
   return (
     <section className="layout_section">
       <div className="d-flex justify-content-between align-items-center header_title">
@@ -319,7 +324,7 @@ function TripComp() {
                 </Form.Group>
               </Col>
             ) : null} */}
-            <Col md={3}>
+            <Col md={2}>
               {" "}
               <Form.Group className="mb-3">
                 <Form.Label>Route</Form.Label>
@@ -378,7 +383,19 @@ function TripComp() {
                 />
               </Form.Group>
             </Col>
-
+            <Col md={2}>
+              <Form.Group>
+                <Form.Label>release days</Form.Label>
+                <Form.Control
+                  type="number"
+                  className="form-control"
+                  placeholder="Enter value"
+                  value={formData.release_days}
+                  name="release_days"
+                  onChange={handleInputChange}
+                ></Form.Control>
+              </Form.Group>
+            </Col>
             <Col md={2} xs={12}>
               <Form.Group className="mb-3">
                 <FormCheck
@@ -506,6 +523,7 @@ function TripComp() {
                   </Button> */}
                 {/* </InputGroup> */}
               </th>
+              <th>Release Days</th>
               <th></th>
             </tr>
           </thead>
@@ -566,6 +584,7 @@ function TripComp() {
                         ?.type_name
                     }
                   </td>
+                  <td>{trip.release_days}</td>
                   {/* {trip.trip_type == 2 ? (
                     <td>
                       {

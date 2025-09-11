@@ -62,7 +62,6 @@ function Facility() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("formData ", formData);
     dispatch(SaveMainFacility(formData)).then((result) => {
       if (result.payload && result.payload.success) {
         setShowPopup(false);

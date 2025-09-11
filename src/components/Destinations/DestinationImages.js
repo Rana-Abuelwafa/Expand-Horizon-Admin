@@ -66,6 +66,7 @@ function DestinationImages() {
         setPopupMessage(result.payload.errors);
       }
     });
+    e.target.value = "";
   };
   // Remove image
   const handleRemove = (img) => {
@@ -118,7 +119,6 @@ function DestinationImages() {
       }
     });
   };
-  console.log("DestinationMain ", DestinationMain);
   return (
     <section className="layout_section">
       {" "}
@@ -156,11 +156,15 @@ function DestinationImages() {
                 type="file"
                 multiple
                 accept="image/*"
-                id="fileUpload"
+                id={"fileUpload_" + destination_id}
                 onChange={handleUpload}
+                //onChange={() => console.log("eeeeeee+" + destination_id)}
                 hidden
               />
-              <label htmlFor="fileUpload" className="upload-btn">
+              <label
+                htmlFor={"fileUpload_" + destination_id}
+                className="upload-btn"
+              >
                 <FaPlus /> Upload Images
               </label>
             </div>

@@ -68,7 +68,6 @@ export default function SideMenu() {
     if (userLocal) {
       const user = JSON.parse(userLocal);
       if (user) {
-        console.log("user.role ", user.role);
         setMyName(`${user.firstName} ${user.lastName}`);
 
         // Filter menu items based on user role

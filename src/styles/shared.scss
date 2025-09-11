@@ -13,7 +13,7 @@
 .secondryBtn {
   background-color: $secondary-color !important;
   border-color: $secondary-color !important;
-  color: $primary-color !important;
+  color: white !important;
 }
 .transBtn {
   background-color: transparent !important;
@@ -184,6 +184,7 @@ a:active {
   height: 100vh;
   max-height: 100vh;
   display: block;
+  max-width: 1000px;
   overflow-y: scroll;
 }
 .header_title {
@@ -302,11 +303,13 @@ a:active {
     background-color: $purple-color !important;
     color: white;
     text-align: center;
+    white-space: nowrap;
   }
 
   .table td {
     text-align: center;
     border-top: 1px solid #ddd;
+    white-space: nowrap;
   }
   .inactive-row {
     background-color: lightcoral !important;

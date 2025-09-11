@@ -46,6 +46,14 @@ export const allMenuItems = [
     roles: ["Admin", "manager", "sales"],
     withSub: false,
   },
+  {
+    id: "Booking",
+    title: "Booking",
+    icon: "FaTicketAlt",
+    path: "/Booking",
+    roles: ["Admin", "manager", "sales"],
+    withSub: false,
+  },
   // {
   //   id: "transfer",
   //   title: "Transfer Category",

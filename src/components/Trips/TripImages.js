@@ -51,6 +51,7 @@ function TripImages() {
         setPopupMessage(result.payload.errors);
       }
     });
+    e.target.value = "";
   };
   // Remove image
   const handleRemove = (img) => {

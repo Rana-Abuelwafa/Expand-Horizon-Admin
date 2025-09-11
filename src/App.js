@@ -22,6 +22,7 @@ import PrivateRoute from "./components/Shared/PrivateRoute";
 import { useNavigate } from "react-router-dom";
 import { setNavigator } from "./helper/navigate";
 import NavigationSetter from "./helper/NavigationSetter";
+import BookingGrid from "./components/Booking/BookingGrid";
 export default function App() {
   // const navigate = useNavigate();
 
@@ -52,6 +53,7 @@ export default function App() {
             <Route path="/trips/images" element={<TripImages />} />
             <Route path="/trips/facility" element={<TripFacility />} />
             <Route path="/facility" element={<Facility />} />
+            <Route path="/Booking" element={<BookingGrid />} />
             {/* <Route path="/transfer" element={<CategorySetting />} /> */}
           </Route>
         </Route>

@@ -415,7 +415,6 @@ function DestinationComp() {
                     name="parent_id"
                     onChange={handleInputChange}
                     value={formData.parent_id}
-                    required
                     className="formInput"
                   >
                     <option value="">select Parent</option>

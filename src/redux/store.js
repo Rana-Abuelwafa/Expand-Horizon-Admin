@@ -3,12 +3,14 @@ import destinationReducer from "../slices/destinationSlice";
 import authReducer from "../slices/AuthSlice";
 import tripReducer from "../slices/tripSlice";
 import facilityReducer from "../slices/facilitySlice";
+import BookingReducer from "../slices/BookingSlice";
 export const store = configureStore({
   reducer: {
     destinations: destinationReducer,
     auth: authReducer,
     trips: tripReducer,
     facility: facilityReducer,
+    booking: BookingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
