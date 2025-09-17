@@ -68,6 +68,7 @@ function TripComp() {
     trip_type: 0,
     transfer_category_id: 0,
     release_days: 1,
+    trip_order: 0,
   });
   const slugRegex = /^(?!-)(?!.*--)[a-zA-Z0-9-]+(?<!-)$/;
   const isValidSlug =
@@ -106,6 +107,7 @@ function TripComp() {
       trip_type: 0,
       transfer_category_id: 0,
       release_days: 1,
+      trip_order: 0,
     });
   };
   const onSubmit = (e) => {
@@ -129,6 +131,7 @@ function TripComp() {
             trip_type: 0,
             transfer_category_id: 0,
             release_days: 1,
+            trip_order: 0,
           });
           setIsUpdate(false);
           let data = { destination_id: 0, trip_type: 0 };
@@ -157,6 +160,7 @@ function TripComp() {
       trip_type: trip.trip_type,
       transfer_category_id: trip.transfer_category_id,
       release_days: trip.release_days,
+      trip_order: trip.trip_order,
     });
   };
   const handleDelete = (trip, isDelete) => {
@@ -174,6 +178,7 @@ function TripComp() {
       trip_type: trip.trip_type,
       transfer_category_id: trip.transfer_category_id,
       release_days: trip.release_days,
+      trip_order: trip.trip_order,
     };
     dispatch(SaveMainTrip(data)).then((result) => {
       if (result.payload && result.payload.success) {
@@ -324,7 +329,7 @@ function TripComp() {
                 </Form.Group>
               </Col>
             ) : null} */}
-            <Col md={2}>
+            <Col md={3}>
               {" "}
               <Form.Group className="mb-3">
                 <Form.Label>Route</Form.Label>
@@ -356,7 +361,7 @@ function TripComp() {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col md={2} xs={12}>
+            <Col md={3} xs={12}>
               <Form.Group className="mb-3" controlId="packageName">
                 <Form.Label>Duration</Form.Label>
                 <Form.Control
@@ -370,7 +375,7 @@ function TripComp() {
                 />
               </Form.Group>
             </Col>
-            <Col md={2} xs={12}>
+            <Col md={3} xs={12}>
               <Form.Group className="mb-3" controlId="packageName">
                 <Form.Label>PickUp</Form.Label>
                 <Form.Control
@@ -383,7 +388,7 @@ function TripComp() {
                 />
               </Form.Group>
             </Col>
-            <Col md={2}>
+            <Col md={3}>
               <Form.Group>
                 <Form.Label>release days</Form.Label>
                 <Form.Control
@@ -394,6 +399,22 @@ function TripComp() {
                   name="release_days"
                   onChange={handleInputChange}
                 ></Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            {" "}
+            <Col md={2} xs={12}>
+              <Form.Label>Order</Form.Label>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="number"
+                  placeholder="order"
+                  name="trip_order"
+                  onChange={handleInputChange}
+                  className="formInput"
+                  value={formData.trip_order}
+                />
               </Form.Group>
             </Col>
             <Col md={2} xs={12}>
@@ -524,6 +545,7 @@ function TripComp() {
                 {/* </InputGroup> */}
               </th>
               <th>Release Days</th>
+              <th>Order</th>
               <th></th>
             </tr>
           </thead>
@@ -585,6 +607,7 @@ function TripComp() {
                     }
                   </td>
                   <td>{trip.release_days}</td>
+                  <td>{trip.trip_order}</td>
                   {/* {trip.trip_type == 2 ? (
                     <td>
                       {

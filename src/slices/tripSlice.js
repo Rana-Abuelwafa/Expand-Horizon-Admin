@@ -117,7 +117,7 @@ export const GetTripTranslationGrp = createAsyncThunk(
     }
   }
 );
-//Get trips transaltions list grouping by lang
+//Get trips prices list grouping by lang
 export const GetTrip_Prices = createAsyncThunk(
   "trips/GetTrip_Prices",
   async (trip_id, thunkAPI) => {
@@ -129,6 +129,24 @@ export const GetTrip_Prices = createAsyncThunk(
       // );
       const response = await api.post(
         `/GetTrip_Prices?trip_id=` + trip_id,
+        {},
+        getAuthHeaders(false)
+      );
+      return response.data;
+    } catch (error) {
+      // return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//get child policy for trip
+export const GetTrip_ChildPolicy = createAsyncThunk(
+  "trips/GetTrip_ChildPolicy",
+  async (trip_id, thunkAPI) => {
+    try {
+      const response = await api.post(
+        `/GetTrip_ChildPolicy?trip_id=` + trip_id,
         {},
         getAuthHeaders(false)
       );
@@ -173,6 +191,23 @@ export const SaveTripPrices = createAsyncThunk(
       // );
       const response = await api.post(
         `/SaveTripPrices`,
+        formData,
+        getAuthHeaders(false)
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+//save trip child policy
+export const SaveTripChildPolicy = createAsyncThunk(
+  "trips/SaveTripChildPolicy",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await api.post(
+        `/SaveTripChildPolicy`,
         formData,
         getAuthHeaders(false)
       );
@@ -369,6 +404,7 @@ const tripSlice = createSlice({
     TripImgs: [],
     TripCategories: [],
     TransferCategories: [],
+    ChildPolicyList: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -520,6 +556,29 @@ const tripSlice = createSlice({
         state.TransferCategories = action.payload;
       })
       .addCase(GetTransfer_Categories.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(SaveTripChildPolicy.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(SaveTripChildPolicy.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(SaveTripChildPolicy.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(GetTrip_ChildPolicy.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(GetTrip_ChildPolicy.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.ChildPolicyList = action.payload;
+      })
+      .addCase(GetTrip_ChildPolicy.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

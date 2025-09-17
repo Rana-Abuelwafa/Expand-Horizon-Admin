@@ -50,6 +50,7 @@ function DestinationComp() {
     route: "",
     parent_id: 0,
     leaf: false,
+    order: 1,
   }); // Form state for save Destinations
 
   const slugRegex = /^(?!-)(?!.*--)[a-zA-Z0-9-]+(?<!-)$/;
@@ -85,6 +86,7 @@ function DestinationComp() {
             route: "",
             parent_id: 0,
             leaf: false,
+            order: 1,
           });
           let data = { country_code: "", lang_code: "en", currency_code: "" };
           dispatch(GetDestinations(data));
@@ -107,6 +109,7 @@ function DestinationComp() {
       route: "",
       parent_id: 0,
       leaf: false,
+      order: 1,
     });
     setIsUpdate(false);
   };
@@ -123,6 +126,7 @@ function DestinationComp() {
       route: dest.route,
       parent_id: dest.parent_id,
       leaf: dest.leaf,
+      order: dest.order,
     });
   };
 
@@ -137,6 +141,7 @@ function DestinationComp() {
       route: dest.route,
       parent_id: dest.parent_id,
       leaf: dest.leaf,
+      order: dest.order,
     };
     dispatch(SaveMainDestination(row)).then((result) => {
       if (result.payload && result.payload.success) {
@@ -150,6 +155,7 @@ function DestinationComp() {
           route: "",
           parent_id: 0,
           leaf: false,
+          order: 1,
         });
         let data = { country_code: "", lang_code: "en", currency_code: "" };
         dispatch(GetDestinations(data));
@@ -214,7 +220,7 @@ function DestinationComp() {
         <th>Name</th>
         <th>Description</th>
         <th>Actions</th> */}
-        <td colSpan="7">
+        <td colSpan="8">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex" style={{ width: "85%" }}>
               <div style={{ width: "15%" }}>
@@ -264,7 +270,7 @@ function DestinationComp() {
           </button>
         </td> */}
         {translation.lang_code != null ? (
-          <td colSpan="7">
+          <td colSpan="8">
             <div className="d-flex justify-content-between align-items-center">
               <div style={{ width: "85%", display: "flex" }}>
                 <div style={{ width: "15%" }}>{translation.lang_code}</div>
@@ -427,7 +433,20 @@ function DestinationComp() {
                   </Form.Control>
                 </Form.Group>
               </Col>
-              <Col md={4} xs={12}>
+              <Col md={2} xs={12}>
+                <Form.Label>Order</Form.Label>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    type="number"
+                    placeholder="order"
+                    name="order"
+                    onChange={handleInputChange}
+                    className="formInput"
+                    value={formData.order}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={2} xs={12}>
                 <Form.Group className="mb-3">
                   <FormCheck
                     className="checkbox_withmargin"
@@ -496,6 +515,7 @@ function DestinationComp() {
               <th>Route</th>
               <th>Parent</th>
               <th>Leaf</th>
+              <th>Order</th>
               <th></th>
             </tr>
           </thead>
@@ -536,6 +556,7 @@ function DestinationComp() {
                         <FaX className="x_icon" />
                       )}
                     </td>
+                    <td>{dest.order}</td>
                     <td>
                       <div className="d-flex">
                         <button

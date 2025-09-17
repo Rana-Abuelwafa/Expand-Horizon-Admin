@@ -241,7 +241,7 @@ function TripPickUps() {
                     </Form.Group>
                   </Col>
                   <Col md={2} xs={12}>
-                    <Form.Group className="mb-3" controlId="packageName">
+                    <Form.Group className="mb-3">
                       <Form.Control
                         type="number"
                         placeholder="order"
