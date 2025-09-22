@@ -31,12 +31,8 @@ import {
 import { FiRefreshCcw } from "react-icons/fi";
 import PopUp from "../Shared/popup/PopUp";
 import LoadingPage from "../Loader/LoadingPage";
+import CurrencySelect from "../Shared/MainSetting/CurrencySelect";
 function CategorySetting() {
-  const currencies = [
-    { code: "USD", symbol: "$" },
-    { code: "EUR", symbol: "€" },
-    { code: "EGP", symbol: "EGP" },
-  ]; // Available currencies
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState(""); // State for search functionality
   const [showPopup, setShowPopup] = useState(false); // State for popup visibility
@@ -288,11 +284,12 @@ function CategorySetting() {
                   required
                 >
                   <option value={""}>select Currency</option>
-                  {currencies.map((currency, index) => (
+                  <CurrencySelect />
+                  {/* {currencies.map((currency, index) => (
                     <option key={index} value={currency.code}>
                       {currency.code}
                     </option>
-                  ))}
+                  ))} */}
                 </Form.Control>
               </Form.Group>
             </Col>

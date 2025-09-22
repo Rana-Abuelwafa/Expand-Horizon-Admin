@@ -15,11 +15,12 @@ import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 import { FiRefreshCcw } from "react-icons/fi";
 import ChildPolicy from "./ChildPolicy";
-const currencies = [
-  { code: "USD", symbol: "$" },
-  { code: "EUR", symbol: "€" },
-  { code: "EGP", symbol: "EGP" },
-]; // Available currencies
+import CurrencySelect from "../Shared/MainSetting/CurrencySelect";
+// const currencies = [
+//   { code: "USD", symbol: "$" },
+//   { code: "EUR", symbol: "€" },
+//   { code: "EGP", symbol: "EGP" },
+// ]; // Available currencies
 function TripPrices() {
   const dispatch = useDispatch();
   const [Expanded, setExpanded] = useState(false);
@@ -125,6 +126,7 @@ function TripPrices() {
   };
   const handleEdit = (trip) => {
     setIsUpdate(true);
+    setExpanded(true);
     setFormData({
       id: trip.id,
       trip_id: trip_id,
@@ -220,11 +222,12 @@ function TripPrices() {
                         required
                       >
                         <option value={""}>select Currency</option>
-                        {currencies.map((currency, index) => (
+                        <CurrencySelect />
+                        {/* {currencies.map((currency, index) => (
                           <option key={index} value={currency.code}>
                             {currency.code}
                           </option>
-                        ))}
+                        ))} */}
                       </Form.Control>
                     </Form.Group>
                   </Col>

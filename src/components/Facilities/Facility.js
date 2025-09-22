@@ -29,11 +29,8 @@ import {
   SaveFacilityTranslation,
 } from "../../slices/facilitySlice";
 import FacilityTranslationModal from "./FacilityTranslationModal";
-const currencies = [
-  { code: "USD", symbol: "$" },
-  { code: "EUR", symbol: "€" },
-  { code: "EGP", symbol: "EGP" },
-]; // Available currencies
+import CurrencySelect from "../Shared/MainSetting/CurrencySelect";
+
 function Facility() {
   const dispatch = useDispatch();
   const { facilities, loading, error } = useSelector((state) => state.facility);
@@ -290,11 +287,12 @@ function Facility() {
                         required
                       >
                         <option value={""}>select Currency</option>
-                        {currencies.map((currency, index) => (
+                        <CurrencySelect />
+                        {/* {currencies.map((currency, index) => (
                           <option key={index} value={currency.code}>
                             {currency.code}
                           </option>
-                        ))}
+                        ))} */}
                       </Form.Control>
                     </Form.Group>
                   </Col>

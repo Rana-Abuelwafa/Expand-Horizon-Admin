@@ -1,32 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  FaCar,
-  FaCity,
-  FaChartSimple,
-  FaShip,
-  FaChevronRight,
-} from "react-icons/fa6";
-import {
-  FiHome,
-  FiSettings,
   FiUser,
   FiLogOut,
   FiChevronLeft,
   FiChevronRight,
   FiSearch,
-  FiDollarSign,
-  FiLayers,
 } from "react-icons/fi";
 import "./SideMenu.scss";
-import {
-  FaChevronDown,
-  FaChevronUp,
-  FaGlobe,
-  FaInfo,
-  FaMap,
-  FaMapMarked,
-} from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import TripsSubMenu from "./TripsSubMenu";
 import DestinationSubMenu from "./DestinationSubMenu";
@@ -34,8 +16,9 @@ import { allMenuItems, SubMenuItems } from "./menuItems";
 import * as FiIcons from "react-icons/fi";
 import * as FaIcons from "react-icons/fa";
 import * as IO5Icons from "react-icons/io5";
-const allIcons = { ...FaIcons, ...IO5Icons, ...FiIcons };
-export default function SideMenu() {
+import * as Fa6Icons from "react-icons/fa6";
+const allIcons = { ...FaIcons, ...IO5Icons, ...FiIcons, ...Fa6Icons };
+export default function SideMenu({ ChangeLayoutWidth }) {
   const navigate = useNavigate();
   const [Items, setItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
@@ -90,7 +73,10 @@ export default function SideMenu() {
         )}
         <button
           className="toggle-button"
-          onClick={() => setCollapsed((prev) => !prev)}
+          onClick={() => {
+            setCollapsed((prev) => !prev);
+            ChangeLayoutWidth((prev) => !prev);
+          }}
         >
           {!collapsed ? (
             <FiChevronLeft size={20} />

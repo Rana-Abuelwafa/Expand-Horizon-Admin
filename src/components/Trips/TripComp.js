@@ -30,6 +30,7 @@ import {
   FaTimes,
   FaUndo,
   FaDollarSign,
+  FaEyeSlash,
 } from "react-icons/fa";
 import PopUp from "../Shared/popup/PopUp";
 import LoadingPage from "../Loader/LoadingPage";
@@ -69,6 +70,7 @@ function TripComp() {
     transfer_category_id: 0,
     release_days: 1,
     trip_order: 0,
+    is_comm_soon: false,
   });
   const slugRegex = /^(?!-)(?!.*--)[a-zA-Z0-9-]+(?<!-)$/;
   const isValidSlug =
@@ -108,6 +110,7 @@ function TripComp() {
       transfer_category_id: 0,
       release_days: 1,
       trip_order: 0,
+      is_comm_soon: false,
     });
   };
   const onSubmit = (e) => {
@@ -132,6 +135,7 @@ function TripComp() {
             transfer_category_id: 0,
             release_days: 1,
             trip_order: 0,
+            is_comm_soon: false,
           });
           setIsUpdate(false);
           let data = { destination_id: 0, trip_type: 0 };
@@ -161,6 +165,7 @@ function TripComp() {
       transfer_category_id: trip.transfer_category_id,
       release_days: trip.release_days,
       trip_order: trip.trip_order,
+      is_comm_soon: trip.is_comm_soon,
     });
   };
   const handleDelete = (trip, isDelete) => {
@@ -179,6 +184,7 @@ function TripComp() {
       transfer_category_id: trip.transfer_category_id,
       release_days: trip.release_days,
       trip_order: trip.trip_order,
+      is_comm_soon: trip.is_comm_soon,
     };
     dispatch(SaveMainTrip(data)).then((result) => {
       if (result.payload && result.payload.success) {
@@ -453,6 +459,24 @@ function TripComp() {
                 />
               </Form.Group>
             </Col>
+            <Col md={2} xs={12}>
+              <Form.Group className="mb-3">
+                <FormCheck
+                  type="checkbox"
+                  id="is_comm_soon"
+                  label="comming soon"
+                  name="is_comm_soon"
+                  className="checkbox_withmargin"
+                  checked={formData.is_comm_soon}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      is_comm_soon: e.target.checked,
+                    });
+                  }}
+                />
+              </Form.Group>
+            </Col>
           </Row>
           <Row>
             {isUpdate ? (
@@ -517,6 +541,7 @@ function TripComp() {
               <th>pickup</th>
               <th>in top</th>
               <th>in slider</th>
+              <th>Soon</th>
               <th>destination</th>
               <th>route</th>
               <th>
@@ -598,6 +623,13 @@ function TripComp() {
                       <FaX className="x_icon" />
                     )}
                   </td>
+                  <td>
+                    {trip.is_comm_soon ? (
+                      <FaCheck className="check_icon" />
+                    ) : (
+                      <FaX className="x_icon" />
+                    )}
+                  </td>
                   <td>{trip.dest_default_name}</td>
                   <td>{trip.route}</td>
                   <td>
@@ -632,9 +664,10 @@ function TripComp() {
                       <button
                         className="btn btn-sm red-btn action_btn"
                         onClick={() => handleDelete(trip, true)}
-                        title="delete"
+                        title="Disactive"
                       >
-                        <FaTrash />
+                        {/* <FaTrash /> */}
+                        <FaEyeSlash />
                       </button>
                     ) : (
                       <button

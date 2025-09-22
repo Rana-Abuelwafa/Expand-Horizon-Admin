@@ -184,8 +184,24 @@ a:active {
   height: 100vh;
   max-height: 100vh;
   display: block;
-  max-width: 1000px;
+}
+.FullWidthLayout {
+  max-width: calc(100vw - 80px); /* maximum width = full viewport width */
+  width: calc(100vw - 80px); /* normally take full parent width */
+}
+.SmallWidthLayout {
+  max-width: calc(100vw - 230px); /* maximum width = full viewport width */
+  width: calc(100vw - 230px); /* normally take full parent width */
+}
+.layout {
+  // padding: 20px;
+  height: 100vh;
+  max-height: 100vh;
+  display: block;
+  // max-width: 1000px;
   overflow-y: scroll;
+  overflow-x: auto; /* enable horizontal scroll if content is wider */
+  white-space: nowrap; /* keep content in one line (optional) */
 }
 .header_title {
   margin-bottom: 20px;

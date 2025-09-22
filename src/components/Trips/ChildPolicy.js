@@ -9,11 +9,8 @@ import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 import { FaEdit, FaPlus, FaTrash, FaUpload } from "react-icons/fa";
 import { FiRefreshCcw } from "react-icons/fi";
-const currencies = [
-  { code: "USD", symbol: "$" },
-  { code: "EUR", symbol: "€" },
-  { code: "EGP", symbol: "EGP" },
-]; // Available currencies
+import CurrencySelect from "../Shared/MainSetting/CurrencySelect";
+
 const priceTypes = [
   { id: 1, name: "Free" },
   { id: 2, name: "% of Adult Price" },
@@ -221,11 +218,12 @@ function ChildPolicy({
                   disabled={formData.pricing_type == 1}
                 >
                   <option value={""}>select Currency</option>
-                  {currencies.map((currency, index) => (
+                  {/* {currencies.map((currency, index) => (
                     <option key={index} value={currency.code}>
                       {currency.code}
                     </option>
-                  ))}
+                  ))} */}
+                  <CurrencySelect />
                 </Form.Control>
               </Form.Group>
             </Col>

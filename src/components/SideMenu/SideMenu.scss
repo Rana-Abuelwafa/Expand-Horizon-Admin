@@ -87,7 +87,7 @@
         display: flex;
         align-items: center;
         width: 100%;
-        padding: 0.5rem 1rem;
+        padding: 10px 8px;
         border-radius: 8px;
         transition: background 0.2s;
 
@@ -255,5 +255,8 @@
         }
       }
     }
+  }
+  .menu-icon {
+    font-size: 18px;
   }
 }

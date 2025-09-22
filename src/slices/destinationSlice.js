@@ -266,21 +266,21 @@ const destinationSlice = createSlice({
       .addCase(UpdateDestinationImage.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
-      .addMatcher(
-        (action) => action.type.endsWith("/pending"),
-        (state) => {
-          //state.status = "loading";
-          state.loading = true;
-        }
-      )
-      .addMatcher(
-        (action) => action.type.endsWith("/rejected"),
-        (state, action) => {
-          state.loading = false;
-          state.error = action.payload;
-        }
-      );
+      });
+    // .addMatcher(
+    //   (action) => action.type.endsWith("/pending"),
+    //   (state) => {
+    //     //state.status = "loading";
+    //     state.loading = true;
+    //   }
+    // )
+    // .addMatcher(
+    //   (action) => action.type.endsWith("/rejected"),
+    //   (state, action) => {
+    //     state.loading = false;
+    //     state.error = action.payload;
+    //   }
+    // );
   },
 });
 
