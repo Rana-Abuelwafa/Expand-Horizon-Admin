@@ -71,6 +71,7 @@ function TripComp() {
     release_days: 1,
     trip_order: 0,
     is_comm_soon: false,
+    trip_code_auto: "",
   });
   const slugRegex = /^(?!-)(?!.*--)[a-zA-Z0-9-]+(?<!-)$/;
   const isValidSlug =
@@ -111,6 +112,7 @@ function TripComp() {
       release_days: 1,
       trip_order: 0,
       is_comm_soon: false,
+      trip_code_auto: "",
     });
   };
   const onSubmit = (e) => {
@@ -136,6 +138,7 @@ function TripComp() {
             release_days: 1,
             trip_order: 0,
             is_comm_soon: false,
+            trip_code_auto: "",
           });
           setIsUpdate(false);
           let data = { destination_id: 0, trip_type: 0 };
@@ -166,6 +169,7 @@ function TripComp() {
       release_days: trip.release_days,
       trip_order: trip.trip_order,
       is_comm_soon: trip.is_comm_soon,
+      trip_code_auto: trip.trip_code_auto,
     });
   };
   const handleDelete = (trip, isDelete) => {
@@ -185,6 +189,7 @@ function TripComp() {
       release_days: trip.release_days,
       trip_order: trip.trip_order,
       is_comm_soon: trip.is_comm_soon,
+      trip_code_auto: trip.trip_code_auto,
     };
     dispatch(SaveMainTrip(data)).then((result) => {
       if (result.payload && result.payload.success) {
